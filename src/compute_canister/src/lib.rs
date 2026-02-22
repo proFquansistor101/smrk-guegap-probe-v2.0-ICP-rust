@@ -60,10 +60,10 @@ pub struct GetJobReq {
 
 #[derive(CandidType, Deserialize, Clone)]
 pub enum JobStatus {
-    Queued,
-    Running,
-    Done,
-    Failed,
+    queued,
+    running,
+    done,
+    failed,
 }
 
 #[derive(CandidType, Deserialize, Clone)]
