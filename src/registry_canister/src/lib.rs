@@ -10,10 +10,10 @@ type Memory = VirtualMemory<DefaultMemoryImpl>;
 
 #[derive(CandidType, Deserialize, Clone, Debug, PartialEq, Eq)]
 pub enum JobStatus {
-    queued,
-    running,
-    done,
-    failed,
+    Queued,
+    Running,
+    Done,
+    Failed,
 }
 
 #[derive(CandidType, Deserialize, Clone, Debug)]
