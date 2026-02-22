@@ -1,67 +1,48 @@
-# SMRK-GUEGAP Probe — ICP v2 (Rust CDK)
+# SMRK–GUEGAP Probe v2.0 (ICP – Rust)
 
-This repo is a **Rust-first learning implementation** of the v2 ICP-only screening architecture:
+Status: ✅ WORKING (Local ICP Verified)
 
-- `registry_canister` — on-chain job registry + audit log (`run_id = sha256(input)`, `commit_hash = sha256(output)`)
-- `compute_canister` — pulls jobs from registry and commits a deterministic screening output
+This repository contains a minimal deterministic on-chain screening prototype running on the Internet Computer (ICP).
 
-> Note: This Rust version currently ships a **deterministic screening stub** (like the Motoko repo),
-> so you can learn the Rust CDK patterns (stable storage, candid, cross-canister calls).
-> In the next iteration we can replace the stub with a real numeric kernel for **N=256**.
+The system has been successfully deployed and tested locally using `dfx`.
 
-## Prerequisites
+---
 
-- DFINITY SDK (`dfx`)
-- Rust toolchain (`rustup`)
-- wasm target:
-  ```bash
-  rustup target add wasm32-unknown-unknown
-  ```
+## What Is Implemented
 
-## Build & deploy (local)
+Two-canister architecture:
 
-```bash
-dfx start --background
-dfx deploy
-```
+- `registry_canister`
+- `compute_canister`
 
-## Test
+### Flow
 
-1) Submit a job:
+1. Job created in registry
+2. Compute canister executes deterministic screening
+3. Result written back on-chain
+4. Registry returns stored output
 
-```bash
-dfx canister call registry_canister submit_job '(record { input = blob "\7b\7d" })'
-```
+---
 
-2) Run screening:
+## Verification Status
 
-```bash
-dfx canister call compute_canister run_screening '(record { run_id = "<RUN_ID_HEX>" })'
-```
+✔ Deployment successful  
+✔ Canisters running  
+✔ Job creation works  
+✔ Screening execution works  
+✔ Deterministic JSON result stored on-chain  
+✔ Result retrieval verified  
 
-3) Read job:
+Example output:
 
-```bash
-dfx canister call registry_canister get_job '(record { run_id = "<RUN_ID_HEX>" })'
-```
-
-## Repo layout
-
-```
-.
-├── dfx.json
-├── candid
-│   ├── registry.did
-│   └── compute.did
-└── src
-    ├── registry_canister
-    │   ├── Cargo.toml
-    │   └── src/lib.rs
-    └── compute_canister
-        ├── Cargo.toml
-        └── src/lib.rs
-```
-
-## Audit metadata
-
-Each output JSON includes `meta.compute` and `meta.registry` (git commit, crate version, canister version, build_ts).
+```json
+{
+  "probe_version": "smrk-guegap-icp-v2",
+  "N": 256,
+  "bulk_r": {
+    "r_mean": 0.5815693,
+    "gap": 0.22,
+    "delta1": 0.0198043
+  },
+  "result": "pass"
+}
