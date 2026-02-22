@@ -54,3 +54,53 @@ dfx deploy
 dfx canister call registry_canister create_job '(record { run_id="test-001"; input=blob "hello" })'
 dfx canister call compute_canister run_screening '(record { run_id="test-001" })'
 dfx canister call registry_canister get_job '(record { run_id="test-001" })'
+
+
+---
+
+## Local Deployment Snapshot (2026-02-21)
+
+This section documents the current local deployment state
+for `smrk-guegap-probe-v2.0-ICP-rust`.
+
+> ⚠️ These IDs are valid only for the current local replica.
+> They may change after `dfx deploy` or if `.dfx/` is removed.
+
+---
+
+### Local Canister IDs
+
+- **compute_canister**  
+  `uxrrr-q7777-77774-qaaaq-cai`
+
+- **registry_canister**  
+  `u6s2n-gx777-77774-qaaba-cai`
+
+- **wallet (local)**  
+  `uqqxf-5h777-77774-qaaaa-cai`
+
+---
+
+### Candid UI (Local)
+
+- compute_canister  
+  http://127.0.0.1:4943/?canisterId=uzt4z-lp777-77774-qaabq-cai&id=uxrrr-q7777-77774-qaaaq-cai
+
+- registry_canister  
+  http://127.0.0.1:4943/?canisterId=uzt4z-lp777-77774-qaabq-cai&id=u6s2n-gx777-77774-qaaba-cai
+
+---
+
+### Registry Audit Metadata (Verified)
+
+```bash
+dfx canister call registry_canister get_registry_meta
+
+Output:
+
+record {
+  git_commit = "275a2dc4f80d";
+  crate_version = "0.2.0";
+  canister_version = 1 : nat64;
+  build_ts = "2026-02-21";
+}
