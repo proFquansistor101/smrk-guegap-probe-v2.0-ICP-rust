@@ -1,0 +1,41 @@
+service : {
+  submit_job : (record { input : blob }) -> (record {
+    run_id : text;
+    run_id_hex : text;
+  });
+
+  // update (not query) in Rust - DID doesn't encode that difference here,
+  // but types must match.
+  get_job : (record { run_id : text }) -> (opt record {
+    run_id : text;
+    created_at_ns : nat64;
+    status : variant { queued; running; done; failed };
+    input : blob;
+    input_sha256 : blob;
+    output : opt blob;
+    output_sha256 : opt blob;
+    math_sha256 : opt blob;
+    commit_hash_hex : opt text;
+    error : opt text;
+  });
+
+  mark_running : (record { run_id : text }) -> (bool);
+
+  set_result : (record {
+    run_id : text;
+    output : blob;
+    math_sha256 : blob;
+  }) -> (bool);
+
+  set_failed : (record {
+    run_id : text;
+    error : text;
+  }) -> (bool);
+
+  get_registry_meta : () -> (record {
+    git_commit : text;
+    crate_version : text;
+    canister_version : nat64;
+    build_ts : text;
+  });
+}

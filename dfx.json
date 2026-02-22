@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "canisters": {
+    "registry_canister": {
+      "type": "custom",
+      "candid": "candid/registry.did",
+      "wasm": "target/wasm32-unknown-unknown/release/registry_canister.wasm",
+      "build": "cargo build -p registry_canister --target wasm32-unknown-unknown --release && ic-wasm target/wasm32-unknown-unknown/release/registry_canister.wasm -o target/wasm32-unknown-unknown/release/registry_canister.wasm shrink"
+    },
+    "compute_canister": {
+      "type": "custom",
+      "candid": "candid/compute.did",
+      "wasm": "target/wasm32-unknown-unknown/release/compute_canister.wasm",
+      "build": "cargo build -p compute_canister --target wasm32-unknown-unknown --release && ic-wasm target/wasm32-unknown-unknown/release/compute_canister.wasm -o target/wasm32-unknown-unknown/release/compute_canister.wasm shrink"
+    }
+  },
+  "defaults": {
+    "build": {
+      "packtool": ""
+    }
+  },
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:4943",
+      "type": "ephemeral"
+    }
+  }
+}

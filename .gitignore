@@ -1,0 +1,10 @@
+# DFX
+.dfx/
+canister_ids.json
+
+# Rust
+target/
+
+# OS
+.DS_Store
+Thumbs.db

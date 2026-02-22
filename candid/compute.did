@@ -1,0 +1,25 @@
+service : {
+  set_registry_canister : (principal) -> (bool);
+  get_registry_canister : () -> (opt principal);
+
+  run_screening : (record { run_id : text }) -> (record {
+    ok : bool;
+    message : text;
+  });
+
+  verify_screening : (record { run_id : text }) -> (record {
+    ok : bool;
+    matches : bool;
+    message : text;
+    stored_output_sha256_hex : opt text;
+    computed_output_sha256_hex : opt text;
+  });
+
+  verify_math : (record { run_id : text }) -> (record {
+    ok : bool;
+    matches : bool;
+    message : text;
+    stored_math_sha256_hex : opt text;
+    computed_math_sha256_hex : opt text;
+  });
+}

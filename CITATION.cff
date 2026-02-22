@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: "SMRK-GUEGAP Probe — ICP v2 (Rust CDK)"
+message: "If you use this software or its results, please cite it."
+type: software
+authors:
+    proFQuansistor
+    affiliation: "101research.group"
+version: 0.2.0
+date-released: 2026-02-21
+license: Apache-2.0
+repository-code: "https://github.com/101researchgroup/smrk-guegap-probe-v2-ICP-rust"
+abstract: >
+  Rust CDK learning implementation of the ICP-only screening architecture:
+  on-chain registry with canonical JSON hashing and a compute canister that commits
+  deterministic screening results. Designed as a scaffold for replacing the stub
+  with real N=256 spectral screening.
+keywords:
+  - internet computer
+  - rust
+  - ic-cdk
+  - auditability
+  - sha256
