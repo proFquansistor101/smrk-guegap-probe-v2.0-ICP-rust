@@ -46,3 +46,11 @@ Example output:
   },
   "result": "pass"
 }
+
+How To Reproduce
+dfx start --background --clean
+dfx deploy
+
+dfx canister call registry_canister create_job '(record { run_id="test-001"; input=blob "hello" })'
+dfx canister call compute_canister run_screening '(record { run_id="test-001" })'
+dfx canister call registry_canister get_job '(record { run_id="test-001" })'
